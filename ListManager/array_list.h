@@ -52,6 +52,7 @@ int   ArrayList_AddLast(tsArrayListInfo *fp_pListInfo,
                         const void      *fp_pNewData);
 int   ArrayList_RemoveAt(tsArrayListInfo    *fp_pListInfo,
                          const unsigned int fp_index);
+void  ArrayList_RemoveAll(tsArrayListInfo *fp_pListInfo);
 void* ArrayList_Get(const tsArrayListInfo *fp_pListInfo,
                     const unsigned int    fp_index);
 void  ArrayList_Destroy(tsArrayListInfo *fp_pListInfo);
