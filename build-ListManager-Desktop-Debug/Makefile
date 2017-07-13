@@ -52,9 +52,11 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../ListManager/main.c \
-		../ListManager/array_list.c 
+		../ListManager/array_list.c \
+		../ListManager/linked_list.c 
 OBJECTS       = main.o \
-		array_list.o
+		array_list.o \
+		linked_list.o
 DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt/mkspecs/common/unix.conf \
 		/usr/lib/qt/mkspecs/common/linux.conf \
@@ -208,6 +210,7 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt/mkspecs/features/qt_config.prf \
 		/usr/lib/qt/mkspecs/linux-g++/qmake.conf \
 		/usr/lib/qt/mkspecs/features/spec_post.prf \
+		../ListManager/.qmake.stash \
 		/usr/lib/qt/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/qt/mkspecs/features/toolchain.prf \
 		/usr/lib/qt/mkspecs/features/default_pre.prf \
@@ -221,8 +224,10 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt/mkspecs/features/exceptions.prf \
 		/usr/lib/qt/mkspecs/features/yacc.prf \
 		/usr/lib/qt/mkspecs/features/lex.prf \
-		../ListManager/ListManager.pro array_list.h ../ListManager/main.c \
-		../ListManager/array_list.c
+		../ListManager/ListManager.pro array_list.h \
+		linked_list.h ../ListManager/main.c \
+		../ListManager/array_list.c \
+		../ListManager/linked_list.c
 QMAKE_TARGET  = ListManager
 DESTDIR       = 
 TARGET        = ListManager
@@ -387,6 +392,7 @@ Makefile: ../ListManager/ListManager.pro /usr/lib/qt/mkspecs/linux-g++/qmake.con
 		/usr/lib/qt/mkspecs/features/qt_config.prf \
 		/usr/lib/qt/mkspecs/linux-g++/qmake.conf \
 		/usr/lib/qt/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/usr/lib/qt/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/qt/mkspecs/features/toolchain.prf \
 		/usr/lib/qt/mkspecs/features/default_pre.prf \
@@ -555,6 +561,7 @@ Makefile: ../ListManager/ListManager.pro /usr/lib/qt/mkspecs/linux-g++/qmake.con
 /usr/lib/qt/mkspecs/features/qt_config.prf:
 /usr/lib/qt/mkspecs/linux-g++/qmake.conf:
 /usr/lib/qt/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /usr/lib/qt/mkspecs/features/exclusive_builds.prf:
 /usr/lib/qt/mkspecs/features/toolchain.prf:
 /usr/lib/qt/mkspecs/features/default_pre.prf:
@@ -612,11 +619,14 @@ compiler_clean:
 
 ####### Compile
 
-main.o: ../ListManager/main.c 
+main.o: ../ListManager/main.c ../ListManager/array_list.h
 	$(CC) -c $(CFLAGS) $(INCPATH) -o main.o ../ListManager/main.c
 
 array_list.o: ../ListManager/array_list.c ../ListManager/array_list.h
 	$(CC) -c $(CFLAGS) $(INCPATH) -o array_list.o ../ListManager/array_list.c
+
+linked_list.o: ../ListManager/linked_list.c ../ListManager/linked_list.h
+	$(CC) -c $(CFLAGS) $(INCPATH) -o linked_list.o ../ListManager/linked_list.c
 
 ####### Install
 
