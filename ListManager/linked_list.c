@@ -15,11 +15,11 @@ tsListInfo ListManager_Init(const short       fp_dataSize,
 {
     tsListInfo sListInfo =
     {
-        NULL,                        /*head of the list*/
-        NULL,                        /*tail of the list*/
-        (short) 0,                   /*count of the list*/
-        (short) fp_dataSize,         /*size of data type*/
-        fp_FreeDataFunc,             /*free data function pointer*/
+        NULL,                   /*head of the list*/
+        NULL,                   /*tail of the list*/
+        (short) 0,              /*count of the list*/
+        (short) fp_dataSize,    /*size of data type*/
+        fp_FreeDataFunc,        /*free data function pointer*/
     };
 
     return sListInfo;
