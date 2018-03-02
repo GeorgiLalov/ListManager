@@ -9,6 +9,28 @@ typedef struct
     float f;
 } shitStruct;
 
+teCmpFuncRetType cmpFunction(const void *fp_pFirstNode,
+                             const void *fp_pSecondNode)
+{
+    shitStruct *pFirstNode  = (shitStruct *) fp_pFirstNode;
+    shitStruct *pSecondNode = (shitStruct *) fp_pSecondNode;
+    teCmpFuncRetType eCmpRet =  eCmpFuncRet_Equal;
+    
+    if (pFirstNode != NULL && pSecondNode != NULL)
+    {
+        if ((((float) pFirstNode->i) + pFirstNode->f) > (((float) pSecondNode->i) + pSecondNode->f))
+        {
+            eCmpRet = eCmpFuncRet_Bigger;
+        }
+        else if ((((float) pFirstNode->i) + pFirstNode->f) < (((float) pSecondNode->i) + pSecondNode->f))
+        {
+            eCmpRet = eCmpFuncRet_Smaller;
+        }
+    }
+    
+    return eCmpRet;
+}
+
 int main()
 {
     tsArrayListInfo info = { 0 };
@@ -16,6 +38,7 @@ int main()
     shitStruct shit = { 0 };
     shitStruct *v = NULL;
     int ret = 0;
+    tCmpNodesFuncP pCmpFunk = cmpFunction;
 
     ret = ArrayList_Init(&info, sizeof(shitStruct), COUNT, eDynamicCapacity);
 
@@ -55,18 +78,17 @@ int main()
         /*for (i = 0; i < COUNT; i++)
         {
             ret = ArrayList_RemoveAt(&info, 0);
-
             if (ret != 0)
             {
                 printf("Error remove at %d\n", i);
             }
         }*/
 
-        ArrayList_RemoveAll(&info);
+        //ArrayList_RemoveAll(&info);
 
         printf("\n");
 
-        for (i = COUNT; i < (COUNT * 2); i++)
+        /*for (i = COUNT; i < (COUNT * 2); i++)
         {
             shit.i = i;
             shit.f = (float) (i + 0.1);
@@ -76,9 +98,11 @@ int main()
             {
                 printf("Error adding %d\n", i);
             }
-        }
+        }*/
+        
+        ArrayList_Sort(&info, pCmpFunk, eDescendingOrder);
 
-        for (i = 0; i < (COUNT * 2); i++)
+        for (i = 0; i < (COUNT); i++)
         {
             v = (shitStruct *) ArrayList_Get(&info, i);
 
