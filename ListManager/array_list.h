@@ -27,6 +27,15 @@ typedef enum
     eCmpFuncRet_Bigger  = 1
 } teCmpFuncRetType;
 
+//! Define the sorting order.
+typedef enum
+{
+    //! Sets ascending order of the cmp function.
+    eAscendingOrder  = 0,
+    //! Sets descending order of the cmp function.
+    eDescendingOrder = 1
+} teCmpSortingOrder;
+
 //! Define the struct holding information for the list.
 typedef struct arrayListInfo
 {
@@ -56,13 +65,14 @@ void  ArrayList_RemoveAll(tsArrayListInfo *fp_pListInfo);
 void* ArrayList_Get(const tsArrayListInfo *fp_pListInfo,
                     const unsigned int    fp_index);
 void  ArrayList_Destroy(tsArrayListInfo *fp_pListInfo);
-int   ArrayList_Sort(tsArrayListInfo      *fp_pListInfo,
-                     const tCmpNodesFuncP *fp_pCmpFuncP);
+int   ArrayList_Sort(tsArrayListInfo         *fp_pListInfo,
+                     const tCmpNodesFuncP    fp_pCmpFuncP,
+                     const teCmpSortingOrder eSortingOrder);
 void* ArrayList_Search(const tsArrayListInfo *fp_pListInfo,
-                       const tCmpNodesFuncP  *fp_pCmpFuncP,
+                       const tCmpNodesFuncP  fp_pCmpFuncP,
                        const void            *fp_pSearchedData);
 int   ArrayList_SortedInsert(tsArrayListInfo      *fp_pListInfo,
-                             const tCmpNodesFuncP *fp_pCmpFuncP,
+                             const tCmpNodesFuncP fp_pCmpFuncP,
                              const void           *fp_pNewData);
 
 #endif // ARRAY_LIST_H
